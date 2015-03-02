@@ -12,7 +12,7 @@ module.exports = function(grunt) {
         },
         uglify: {
             options: {
-                banner: '/*! <%= pkg.name %> v<%= pkg.version %> | (c) <%= grunt.template.today("yyyy") %>, <%= pkg.author %> | http://opensource.org/licenses/MIT */\n'
+                banner: '/*! <%= pkg.name %> v<%= pkg.version %> | (c) <%= grunt.template.today("yyyy") %>, <%= pkg.author.name %> | http://opensource.org/licenses/MIT */\n'
             },
             my_target: {
                 files: {
@@ -29,7 +29,7 @@ module.exports = function(grunt) {
                     plugins: [
                         new (require('less-plugin-autoprefix'))({browsers: ["last 2 versions"]})
                     ],
-                    banner: '/*! <%= pkg.name %> v<%= pkg.version %> | (c) <%= grunt.template.today("yyyy") %>, <%= pkg.author %> | http://opensource.org/licenses/MIT */\n',
+                    banner: '/*! <%= pkg.name %> v<%= pkg.version %> | (c) <%= grunt.template.today("yyyy") %>, <%= pkg.author.name %> | http://opensource.org/licenses/MIT */\n',
                     cleancss: true,
                     compress: true,
                 },
