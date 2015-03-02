@@ -1,0 +1,591 @@
+/**
+ * Aeris template
+ * _____________________________________________________________________________
+ *
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 Thomas Girard
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *
+ * @author Thomas Girard
+ * @copyright (c) 2015, Thomas Girard
+ * @license http://opensource.org/licenses/MIT
+ * @version 0.1.0
+ */
+
+@import "settings.less";
+
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%; /* 1 */
+    -ms-text-size-adjust: 100%; /* 2 */
+    -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+body {
+	margin: 0;
+	font-size: @fontSize;
+    font-family: @fontFamily;
+    line-height: @fontLine;
+	overflow: hidden;
+	color: @foreground;
+	background: @background;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+    display: block;
+}
+
+audio,
+canvas,
+video {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+audio:not([controls]) {
+    display: none;
+    height: 0;
+}
+
+[hidden] {
+    display: none;
+}
+
+a {
+	text-decoration: none;
+	color: @blue;
+}
+
+a:hover, a:focus {
+	color: @red;
+}
+
+a:active { /* firefox */
+    outline: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: bold;
+	max-width: 100%;
+	overflow: hidden;
+	text-rendering: geometricPrecision;
+}
+
+h1, .huge {
+	font-size: 2em;
+	line-height: 1.5em;
+	margin: .75em 0 .5em;
+}
+
+h2, .x-large {
+	font-size: 1.75em;
+	line-height: 1em;
+	margin: 1em 0 1em;
+}
+
+h3, .large {
+	font-size: 1.25em;
+	line-height: 1.2em;
+	margin: 1em 0 .2em;
+}
+
+h5, h6, p, ul, blockquote, dl, pre, img, .medium {
+	font-size: 1em;
+	line-height: 1.5em;
+	margin: .5em 0 .5em;
+	padding: 0;
+}
+
+blockquote {
+	margin-left: 3em;
+}
+
+ul.inline {
+	padding: 0;
+	list-style: none;
+}
+ul.inline li, div.inline {
+	display: inline-block;
+}
+
+abbr[title] {
+    border-bottom: 1px dotted;
+}
+
+b,
+strong {
+    font-weight: bold;
+}
+
+dfn {
+    font-style: italic;
+}
+
+hr {
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 0;
+}
+
+mark {
+    background: @green;
+    color: @foreground;
+}
+
+code,
+kbd,
+pre,
+samp {
+	font-family: monospace, serif;
+	_font-family: Consolas, Inconsolata, "courier new", monospace;
+	font-size: .8em;
+	line-height: 1.25em;
+}
+
+pre {
+    white-space: pre;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+q:before,
+q:after {
+    content: '';
+    content: none;
+}
+
+small {
+    font-size: .8em;
+}
+
+sub,
+sup {
+    font-size: .75em;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sup {
+    top: -0.5em;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	border: 0;
+	-ms-interpolation-mode: bicubic;
+}
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+figure {
+    margin: 0;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.sr-only {
+	border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+/* Structure
+------------------------------------------------------------------------------*/
+
+.column {
+    float: left;
+}
+
+#main-wrapper {
+    position: absolute;
+    top: 2.25em;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow-y: hidden;
+    /*overflow-x: hidden;*/
+}
+
+#row-wrapper {
+    width: 200%;
+    height: 100%;
+    /*margin-left: -50%;*/
+}
+
+#menu {
+    width: 50%;
+    height: 100%;
+    padding: 0;
+    overflow-y: auto;
+}
+
+#sheet {
+    width: 50%;
+    height: 100%;
+    overflow: auto;
+}
+
+#main-wrapper.closed #row-wrapper {
+    margin-left: -50%;
+}
+
+/* Navbar
+------------------------------------------------------------------------------*/
+
+#navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 9999;
+}
+
+#navbar ul, #navbar li {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+}
+
+#navbar ul {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    background: @x_dark;
+    border-bottom: 1px solid @dark;
+}
+
+#navbar > ul > li:first-child {
+    flex: 1 1 .25em;
+}
+
+#navbar > ul > li {
+    flex: 5 2 .5em;
+}
+
+#navbar > ul > li:last-child {
+    flex: 2 2 0;
+}
+
+#navbar > ul > li > ul {
+    justify-content: flex-end;
+    border: 0;
+    border-left: 1px solid @dark;
+}
+
+#navbar > ul > li > ul > li {
+    flex: 1 1 auto;
+}
+
+#navbar li.sitename a {
+    /* ellipsis */
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip ellipsis;
+}
+
+#navbar li.sitename strong {
+    padding: 0 .5em;
+}
+
+#navbar a {
+    display: block;
+    /*padding: .25em;*/
+    line-height: 2.25em;
+    text-decoration: none;
+    outline: 0;
+    color: @x_light;
+    fill: @x_light;
+    stroke: @x_light;
+    transition: .25s;
+}
+
+#navbar a:hover, #navbar a:focus {
+    background: @dark;
+}
+
+#navbar svg {
+    display: inline-block;
+    vertical-align: middle;
+    max-height: 1em;
+    width: auto;
+}
+
+
+/* Menu
+------------------------------------------------------------------------------*/
+
+#menu {
+    background: @neutral;
+}
+
+#menu h3 {
+    text-align: center;
+    margin: 1em 0 .5em;
+    line-height: 1.5em;
+    font-size: 1em;
+    color: @light;
+}
+
+#menu ul, #menu li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#menu a {
+    display: block;
+    padding: 0 1.5em;
+    line-height: 3em;
+    text-decoration: none;
+    color: @x_light;
+    border-bottom: 1px solid @dark;
+
+    /* ellipsis */
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip ellipsis;
+    transition: .25s;
+}
+
+#menu li:first-child a {
+    border-top: 1px solid @dark;
+}
+
+#menu a:hover, #menu a:focus {
+    outline: 0;
+    background: @dark;
+}
+
+
+/* Banner
+------------------------------------------------------------------------------*/
+
+#banner {
+    display: table;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-image: url(../media/banner.jpg);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: cover;
+}
+
+#banner .headline {
+    display: table-cell;
+    padding: 1.5em;
+    vertical-align: middle;
+    background: rgba(240, 241, 235, .25);
+
+    -webkit-text-stroke-width: .1ex;
+    -webkit-text-stroke-color: rgba(240, 241, 235, .35);
+}
+
+#banner h1 {
+    font: 700 3em/1.25em Constantia, "Linux Libertine Display G", Cambria, Georgia, serif;
+	margin: .25em 0;
+	text-align: center;
+}
+
+#banner h2, #banner.subtitle {
+    font-style: italic;
+    font-weight: normal;
+    word-spacing: 1ex;
+}
+
+/* Main : commons
+------------------------------------------------------------------------------*/
+
+.meta {
+    color: @neutral;
+}
+
+
+/* Main : sections
+------------------------------------------------------------------------------*/
+
+#last-updates {
+    margin: .5em;
+    column-count: 1;
+    column-gap: .25em;
+
+}
+
+#last-updates .post {
+    display: inline-block;
+    margin: .25em 0 0;
+    padding: .5em .5em 1.5em;
+}
+
+.read-more {
+    margin: .75em 0;
+}
+
+
+/* Media Queries
+------------------------------------------------------------------------------*/
+
+@media only screen and (min-device-height: 700px) {
+
+    /* Structure
+    --------------------------------------------------------------------------*/
+
+    #main-wrapper {
+        top: 0;
+        left: 3em;
+    }
+    #row-wrapper {
+        width: 125%;
+        /*margin-left: -25%;*/
+    }
+    #menu {
+        width: 20%;
+    }
+    #sheet {
+        width: 80%;
+    }
+
+    #main-wrapper.closed #row-wrapper {
+        margin-left: -25%;
+    }
+
+    /* Navbar
+    --------------------------------------------------------------------------*/
+
+    #navbar {
+        width: auto;
+        height: 100%;
+    }
+
+    #navbar ul {
+        flex-flow: column wrap;
+        border: 0;
+        border-right: 1px solid @dark;
+        text-align: center;
+    }
+
+    #navbar li {
+        width: 100%;
+    }
+
+    #navbar > ul > li > ul {
+        height: auto;
+    }
+
+    #navbar > ul > li:first-child {
+        flex: 2 1 0;
+        self-align: center;
+    }
+
+    #navbar > ul > li {
+        flex: 2 1 0;
+    }
+
+    #navbar > ul > li:last-child {
+        flex: 1 1 .25em;
+    }
+
+    #navbar > ul > li > ul {
+        border: 0;
+        border-top: 1px solid @dark;
+    }
+
+    #navbar a {
+        padding: 0 .25em;
+    }
+
+    #navbar li.sitename a {
+        width: 3em;
+        word-wrap: break-word;
+        white-space: normal;
+    }
+
+    #navbar li.sitename strong {
+        display: inline-block;
+        width: 1ex;
+        line-height: 1em;
+        padding: .5em 0;
+    }
+
+}
+
+@media only screen and (min-device-width: 900px) {
+
+    #last-updates {
+        column-count: 2;
+    }
+
+}
+
+/* Viewports
+------------------------------------------------------------------------------*/
+
+@-o-viewport {
+    width: device-width;
+    zoom: 1;
+}
+
+@-ms-viewport {
+    width: device-width;
+    zoom: 1;
+}
+
+@viewport {
+    width: device-width;
+    zoom: 1;
+}
