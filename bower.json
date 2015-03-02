@@ -1,19 +1,19 @@
 {
-  "name": "aeris-static",
-  "version": "0.1.0",
-  "homepage": "https://github.com/vuzonp/aeris-static",
-  "authors": [
-    "Thomas Girard <geek@thomasgirard.fr>"
-  ],
-  "description": "Static files shared of Æris projects",
-  "main": "dist/css/aeris.min.css",
-  "license": "MIT",
-  "private": true,
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ]
+    "name": "aeris-static",
+    "version": "0.1.0",
+    "homepage": "https://github.com/vuzonp/aeris-static",
+    "authors": [
+        "Thomas Girard <geek@thomasgirard.fr>"
+    ],
+    "description": "Static files shared of Æris projects",
+    "main": "dist/css/aeris.min.css",
+    "license": "MIT",
+    "private": true,
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ]
 }

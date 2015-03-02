@@ -30,38 +30,4 @@
  * @version 0.1.0
  */
 
-/* ColorScheme
-------------------------------------------------------------------------------*/
-
-@xx_light:  #FFFFFF;
-@x_light:   #F0F1EB;
-@light:     mix(@neutral, @x_light);
-@neutral:   #494E51;
-@dark:      #343D43;
-@x_dark:    #1E2C35;
-@xx_dark:   #162728;
-
-@blue:      #023F5B;
-@green:     #509451;
-@red:       #955251;
-@teal:      #50947a;
-@violet:    #515094;
-
-//------------------
-
-@background: @x_light;
-@foreground: @xx_dark;
-
-
-/* Typography
-------------------------------------------------------------------------------*/
-
-@fontFamily: Constantia, "Linux Libertine Display G", Cambria, Georgia, serif;
-@fontSize: 1.25em;
-@fontLine: 1.5em;
-
-
-/* Animations
-------------------------------------------------------------------------------*/
-
-@duration: .25s;
+// Do Something...
