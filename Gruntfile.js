@@ -12,7 +12,7 @@ module.exports = function(grunt) {
         },
         uglify: {
             options: {
-                banner: '/*! <%= pkg.name %> v<%= pkg.version %> | (c) <%= grunt.template.today("yyyy") %>, <%= pkg.author.name %> | http://opensource.org/licenses/MIT */\n'
+                banner: '/*! <%= pkg.name %> v<%= pkg.version %> | (c) <%= grunt.template.today("yyyy") %>, <%= pkg.author.name %> | http://opensource.org/licenses/MIT */\n',
             },
             my_target: {
                 files: {
@@ -27,7 +27,7 @@ module.exports = function(grunt) {
                 options: {
                     paths: ["src/less"],
                     plugins: [
-                        new (require('less-plugin-autoprefix'))({browsers: ["last 2 versions"]})
+                        new (require('less-plugin-autoprefix'))({browsers: ["last 3 versions"]})
                     ],
                     banner: '/*! <%= pkg.name %> v<%= pkg.version %> | (c) <%= grunt.template.today("yyyy") %>, <%= pkg.author.name %> | http://opensource.org/licenses/MIT */\n',
                     cleancss: true,
@@ -46,6 +46,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-less');
 
     // Default task(s).
-    grunt.registerTask('default', ['uglify', 'less']);
-
+    grunt.registerTask('default', ['bower', 'uglify', 'less']);
 };
