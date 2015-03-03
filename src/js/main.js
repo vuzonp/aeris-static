@@ -27,7 +27,76 @@
  * @author Thomas Girard
  * @copyright (c) 2015, Thomas Girard
  * @license http://opensource.org/licenses/MIT
- * @version 0.1.0
+ * @version 0.1.1
  */
 
-// Do Something...
+"use strict";
+var Æ = (function() {
+
+    // Helpers
+    //--------------------------------------------------------------------------
+
+    var Classes = {
+
+        getAll: function(elem) {
+            return elem.className.split(" ");
+        }
+
+    }
+
+    // Handlers
+    //--------------------------------------------------------------------------
+
+    var æ = {
+
+        /**
+         * Menu component
+         */
+        menu: {
+
+            // Selectors:
+            elem: document.getElementById('menu'),
+            wrapper: document.getElementById('main-wrapper'),
+            widget: document.getElementById('menu-btn'),
+
+            // Actions
+            init: function() {
+                if ("classList" in this.wrapper) {
+                    this.wrapper.style.overflow = 'hidden';
+                    this.close();
+                }
+            },
+
+            isHidden: function() {
+                return this.wrapper.classList.contains('closed');
+            },
+
+            close: function() {
+                this.wrapper.classList.add('closed');
+            },
+
+            open: function() {
+                this.wrapper.classList.remove('closed');
+            },
+
+            toggle: function() {
+                this.wrapper.classList.toggle('closed');
+            }
+        }
+
+    };
+
+
+    // Events
+    //--------------------------------------------------------------------------
+
+    æ.menu.widget.onclick = function() {
+        æ.menu.toggle();
+        return false;
+    };
+
+
+    //--------------------------------------------------------------------------
+    return æ;
+
+})();
