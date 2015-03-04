@@ -276,7 +276,7 @@ table {
 }
 
 #main-wrapper.closed #row-wrapper {
-    margin-left: -50%;
+    margin-left: -100%;
 }
 
 /* Navbar
@@ -432,21 +432,26 @@ table {
     padding: 1.5em;
     vertical-align: middle;
     background: rgba(240, 241, 235, .25);
-
-    -webkit-text-stroke-width: .1ex;
-    -webkit-text-stroke-color: rgba(240, 241, 235, .35);
+    text-shadow: 3px 0 rgba(255, 255, 255, .3);
 }
 
 #banner h1 {
     font: 700 3em/1.25em Constantia, "Linux Libertine Display G", Cambria, Georgia, serif;
 	margin: .25em 0;
 	text-align: center;
+
+
+    -webkit-text-stroke: 1.5px @x_light;
+            text-stroke: 1.5px @x_light;
 }
 
 #banner h2, #banner.subtitle {
     font-style: italic;
-    font-weight: normal;
+    font-weight: 700;
     word-spacing: 1ex;
+
+    -webkit-text-stroke: 1px rgba(255, 255, 255, .3);
+            text-stroke: 1px rgba(255, 255, 255, .3);
 }
 
 /* Main : commons
@@ -477,11 +482,37 @@ table {
     margin: .75em 0;
 }
 
+#last-updates .wip {
+    column-span: all;
+    line-height: 3em;
+    text-align: center;
+    font-style: italic;
+    color: @x_light;
+    background: @violet;
+}
+
+#last-updates img {
+    width: 100% !important;
+}
+
+
+/* Footer
+------------------------------------------------------------------------------*/
+
+#fold {
+    font-size: .75em;
+    padding: @fontLine;
+    text-align: center;
+    color: @x_dark;
+    background: @yellow;
+    border-top: 1px solid mix(@yellow, @dark, 90%);
+}
+
 
 /* Media Queries
 ------------------------------------------------------------------------------*/
 
-@media only screen and (min-device-height: 700px) {
+@media (min-width: 700px) {
 
     /* Structure
     --------------------------------------------------------------------------*/
@@ -493,16 +524,20 @@ table {
     #row-wrapper {
         width: 125%;
         /*margin-left: -25%;*/
+        width: calc(100% + 20em);
     }
     #menu {
         width: 20%;
+        width: calc(20em);
     }
     #sheet {
         width: 80%;
+        width: calc(100% - 20em);
     }
 
     #main-wrapper.closed #row-wrapper {
         margin-left: -25%;
+        margin-left: calc(-20em);
     }
 
     /* Navbar
@@ -565,7 +600,7 @@ table {
 
 }
 
-@media only screen and (min-device-width: 900px) {
+@media (min-width: 900px) {
 
     #last-updates {
         column-count: 2;
