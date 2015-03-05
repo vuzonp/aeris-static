@@ -133,6 +133,11 @@ blockquote {
 	margin-left: 3em;
 }
 
+ul {
+    margin-left: @fontLine;
+    padding-left: @fontSize;
+}
+
 ul.inline {
 	padding: 0;
 	list-style: none;
@@ -433,13 +438,13 @@ table {
     vertical-align: middle;
     background: rgba(240, 241, 235, .25);
     text-shadow: 3px 0 rgba(255, 255, 255, .3);
+    border: .5em solid @x_dark;
 }
 
-#banner h1 {
+#banner h1, #headline {
     font: 700 3em/1.25em Constantia, "Linux Libertine Display G", Cambria, Georgia, serif;
 	margin: .25em 0;
 	text-align: center;
-
 
     -webkit-text-stroke: 1.5px @x_light;
             text-stroke: 1.5px @x_light;
@@ -468,18 +473,107 @@ table {
 #last-updates {
     margin: .5em;
     column-count: 1;
-    column-gap: .25em;
-
+    column-gap: .5em;
 }
 
 #last-updates .post {
     display: inline-block;
-    margin: .25em 0 0;
+    line-height: 1;
+    width: 100%;
     padding: .5em .5em 1.5em;
 }
 
+#last-updates .post.pictorial {
+    height: 20em;
+    padding: 0;
+    background-position: 50%;
+    //background-size: 100% auto;
+    background-size: cover;
+    background-repeat: no-repeat;
+    //filter: grayscale(100%);
+    cursor: pointer;
+
+    &, & * {
+        transition: 1s;
+    }
+}
+
+#last-updates .post.pictorial header {
+    display: table;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+}
+
+#last-updates .post.pictorial header > div {
+    display: table-cell;
+    vertical-align: middle;
+    padding: @fontLine;
+    background: @rgba;
+
+    .hex2rgba(@x_dark, .5);
+}
+
+#last-updates .post.pictorial .post-title {
+    margin: 0 0 1.5em;
+}
+
+#last-updates .post.pictorial .summary {
+    &:extend(.sr-only);
+}
+
+#last-updates .post.pictorial header a {
+    color: @xx_light;
+    text-shadow: 3px 0 rgba(0, 0, 0, .85);
+    -webkit-text-stroke: 1px rgba(0, 0, 0, .3);
+            text-stroke: 1px rgba(0, 0, 0, .3);
+}
+
+#last-updates .post.pictorial .meta {
+    color: @yellow;
+    opacity: 0;
+}
+
+#last-updates .post.pictorial:hover {
+    //background-size: 125% auto;
+    //filter: grayscale(0%);
+
+    header {
+        background: @rgba;
+        .hex2rgba(@green, .5);
+    }
+
+    .meta {
+        opacity: 1;
+    }
+}
+
 .read-more {
-    margin: .75em 0;
+    position: relative;
+    float: right;
+}
+
+.read-more a {
+    display: block;
+    padding: 0 .5em;
+    line-height: 2em;
+    font-weight: bold;
+    color: @green;
+    background: @rgba;
+    transition: @duration;
+
+    .hex2rgba(@xx_dark, .85);
+}
+
+.read-more a:hover,
+.read-more a:focus,
+#last-updates .post.pictorial:hover .read-more a {
+    background: @red;
+    color: @x_light;
+}
+
+.post.pictorial .read-more {
+    margin: -2.5em .5em 0;
 }
 
 #last-updates .wip {
@@ -495,6 +589,27 @@ table {
     width: 100% !important;
 }
 
+/* Single : commons
+------------------------------------------------------------------------------*/
+
+#singlepage #headline {
+    margin: .25em 0 1em;
+}
+
+#singlepage #content {
+    margin: auto;
+    max-width: 40em;
+    padding: .75em;
+}
+
+#singlepage #content a {
+    text-decoration: underline;
+}
+
+#singlepage #content a:visited {
+    color: @green;
+}
+
 
 /* Footer
 ------------------------------------------------------------------------------*/
@@ -504,15 +619,13 @@ table {
     padding: @fontLine;
     text-align: center;
     color: @x_dark;
-    background: @yellow;
-    border-top: 1px solid mix(@yellow, @dark, 90%);
 }
 
 
 /* Media Queries
 ------------------------------------------------------------------------------*/
 
-@media (min-width: 700px) {
+@media all and (min-width: 700px) {
 
     /* Structure
     --------------------------------------------------------------------------*/
@@ -523,7 +636,6 @@ table {
     }
     #row-wrapper {
         width: 125%;
-        /*margin-left: -25%;*/
         width: calc(100% + 20em);
     }
     #menu {
@@ -551,7 +663,6 @@ table {
     #navbar ul {
         flex-flow: column wrap;
         border: 0;
-        border-right: 1px solid @dark;
         text-align: center;
     }
 
@@ -600,11 +711,15 @@ table {
 
 }
 
-@media (min-width: 900px) {
+@media all and (min-width: 900px) {
 
     #last-updates {
         column-count: 2;
     }
+
+}
+
+@media all and (min-width: 900px) and (orientation:landscape) {
 
 }
 
