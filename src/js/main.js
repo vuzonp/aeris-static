@@ -84,48 +84,33 @@ var Æ = (function() {
         post: {
 
             init: function() {
-                var wrapper = document.getElementById('last-updates');
-                if (wrapper) {
+                var wrapper = document.getElementById('last-updates').getElementsByClassName('gallery');
 
-                    var elem, img, post, src;
-                    var list = wrapper.getElementsByClassName('post-picture');
+                for(var i = 0; i < wrapper.length; i++) {
+
+                    var w = wrapper.item(i);
+
+                    var elem, img, post, summary, src;
+                    var list = w.getElementsByClassName('post-picture');
 
                     while(list.length > 0) {
                         // Select the nodes
                         var elem = list.item(0);
                         img = (elem.nodeName == "IMG") ? elem : elem.getElementsByTagName('img')[0];
-                        post =  elem.parentNode;
+                        summary =  elem.parentNode;
+                        post = summary.parentNode;
 
                         if (img.nodeName == 'IMG') {
                             src = img.getAttribute('src');
                             post.classList.add('pictorial');
-                            post.style.backgroundImage = 'url('+ src +')';
+                            summary.style.backgroundImage = 'url('+ src +')';
                         }
-                        post.removeChild(elem);
+                        summary.removeChild(elem);
                         post.onclick = function() {
                             var url = this.getElementsByTagName('a')[0].getAttribute('href');
                             window.location = url;
                         };
                     }
-
-                    /*
-                    for (var i = 0; i <= list.length; i++) {
-
-                        var elem, img, post, src;
-
-                        // Select the nodes
-                        var elem = list[i];
-                        img = (elem.nodeName == "IMG") ? elem : elem.getElementsByTagName('img')[0];
-                        post =  elem.parentNode;
-
-                        //if (img.nodeName != 'IMG') return false;
-
-                        src = img.getAttribute('src');
-                        post.classList.add('pictorial');
-                        post.style.backgroundImage = 'url('+ src +')';
-                        post.removeChild(elem);
-                    }
-                    */
                 }
             }
 

@@ -33,7 +33,7 @@
 /* ColorScheme
 ------------------------------------------------------------------------------*/
 
-@xx_light:  #FFFFFF;
+@xx_light:  mix(#FFFFFF, #F0F1EB);
 @x_light:   #F0F1EB;
 @light:     mix(@neutral, @x_light);
 @neutral:   #494E51;
@@ -58,8 +58,15 @@
 ------------------------------------------------------------------------------*/
 
 @fontFamily: Constantia, "Linux Libertine Display G", Cambria, Georgia, serif;
+@fontTitle: 'Playfair Display', Constantia, "Linux Libertine Display G", Cambria, Georgia, serif;
 @fontSize: 1.25em;
 @fontLine: 1.5em;
+
+
+/* List of items
+------------------------------------------------------------------------------*/
+
+@postHeight: @fontLine * 6;
 
 
 /* Animations
