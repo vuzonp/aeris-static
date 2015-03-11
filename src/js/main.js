@@ -27,7 +27,7 @@
  * @author Thomas Girard
  * @copyright (c) 2015, Thomas Girard
  * @license http://opensource.org/licenses/MIT
- * @version 0.1.1
+ * @version 0.2.0
  */
 
 "use strict";
@@ -36,13 +36,7 @@ var Æ = (function() {
     // Helpers
     //--------------------------------------------------------------------------
 
-    var Classes = {
-
-        getAll: function(elem) {
-            return elem.className.split(" ");
-        }
-
-    }
+    var isRetina = (window.devicePixelRatio > 1);
 
     // Handlers
     //--------------------------------------------------------------------------
@@ -82,6 +76,49 @@ var Æ = (function() {
             toggle: function() {
                 this.wrapper.classList.toggle('closed');
             }
+        },
+
+        /**
+         * Posts previewer
+         */
+        post: {
+
+            init: function() {
+                var wrapper = document.getElementById('last-updates').getElementsByClassName('gallery');
+
+                for(var i = 0; i < wrapper.length; i++) {
+
+                    var w = wrapper.item(i);
+
+                    var elem, img, post, summary, src;
+                    var list = w.getElementsByClassName('post-picture');
+
+                    while(list.length > 0) {
+                        // Select the nodes
+                        var elem = list.item(0);
+                        img = (elem.nodeName == "IMG") ? elem : elem.getElementsByTagName('img')[0];
+                        summary =  elem.parentNode;
+                        post = summary.parentNode;
+
+                        if (img.nodeName == 'IMG') {
+                            src = img.getAttribute('src');
+                            post.classList.add('pictorial');
+                            summary.style.backgroundImage = 'url('+ src +')';
+                        }
+                        summary.removeChild(elem);
+                        post.onclick = function() {
+                            var url = this.getElementsByTagName('a')[0].getAttribute('href');
+                            window.location = url;
+                        };
+                    }
+                }
+            }
+
+        },
+
+        setup: function() {
+            this.menu.init();
+            this.post.init();
         }
 
     };

@@ -30,50 +30,12 @@
  * @version 0.2.0
  */
 
-/* ColorScheme
-------------------------------------------------------------------------------*/
-
-@xx_light:  mix(#FFFFFF, #F0F1EB);
-@x_light:   #F0F1EB;
-@light:     mix(@neutral, @x_light);
-@neutral:   #494E51;
-@dark:      #343D43;
-@x_dark:    #1E2C35;
-@xx_dark:   #162728;
-
-@blue:      #023F5B;
-@green:     #509451;
-@red:       #955251;
-@teal:      #50947a;
-@violet:    #515094;
-@yellow:    #EED7AC;
-
-//------------------
-
-@background: @x_light;
-@foreground: @xx_dark;
-
-
-/* Typography
-------------------------------------------------------------------------------*/
-
-@fontFamily: Constantia, "Linux Libertine Display G", Cambria, Georgia, serif;
-@fontTitle: 'Playfair Display', Constantia, "Linux Libertine Display G", Cambria, Georgia, serif;
-@fontSize: 1.25em;
-@fontLine: 1.5em;
-
-
-/* List of items
-------------------------------------------------------------------------------*/
-
-@postHeight: @fontLine * 6;
-
-
-/* Animations
-------------------------------------------------------------------------------*/
-
-@duration: .25s;
-
-/* Dependencies
-------------------------------------------------------------------------------*/
-@import "mixins.less";
+/**
+ * Helper for use hexadecimal colors with rgba
+ */
+.hex2rgba(@hex; @alpha: 1) {
+    @r: red(@hex);
+    @g: green(@hex);
+    @b: blue(@hex);
+    @rgba: rgba(@r, @g, @b, @alpha);
+}

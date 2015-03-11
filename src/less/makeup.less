@@ -27,7 +27,7 @@
  * @author Thomas Girard
  * @copyright (c) 2015, Thomas Girard
  * @license http://opensource.org/licenses/MIT
- * @version 0.1.1
+ * @version 0.2.0
  */
 
 @import "settings.less";
@@ -97,10 +97,11 @@ a:active { /* firefox */
     outline: 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, .huge, .x-large, .large, .medium {
 	font-weight: bold;
 	max-width: 100%;
 	overflow: hidden;
+    font-family: @fontTitle;
 	text-rendering: geometricPrecision;
 }
 
@@ -112,8 +113,8 @@ h1, .huge {
 
 h2, .x-large {
 	font-size: 1.75em;
-	line-height: 1em;
-	margin: 1em 0 1em;
+	line-height: 1.5em;
+	margin: .75em 0 .75em;
 }
 
 h3, .large {
@@ -131,6 +132,11 @@ h5, h6, p, ul, blockquote, dl, pre, img, .medium {
 
 blockquote {
 	margin-left: 3em;
+}
+
+ul {
+    margin-left: @fontLine;
+    padding-left: @fontSize;
 }
 
 ul.inline {
@@ -227,6 +233,19 @@ table {
     border-spacing: 0;
 }
 
+.clearfix {
+    zoom:1; /* For IE 6/7 (trigger hasLayout) */
+
+    &::before, &:after {
+        content:"";
+        display:table;
+    }
+
+    &:after {
+        clear:both;
+    }
+}
+
 .sr-only {
 	border: 0;
     clip: rect(0 0 0 0);
@@ -237,6 +256,7 @@ table {
     position: absolute;
     width: 1px;
 }
+
 
 /* Structure
 ------------------------------------------------------------------------------*/
@@ -258,7 +278,6 @@ table {
 #row-wrapper {
     width: 200%;
     height: 100%;
-    /*margin-left: -50%;*/
     transition: @duration;
 }
 
@@ -272,12 +291,14 @@ table {
 #sheet {
     width: 50%;
     height: 100%;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #main-wrapper.closed #row-wrapper {
-    margin-left: -50%;
+    margin-left: -100%;
 }
+
 
 /* Navbar
 ------------------------------------------------------------------------------*/
@@ -370,7 +391,7 @@ table {
 ------------------------------------------------------------------------------*/
 
 #menu {
-    background: @neutral;
+    background: @yellow;
 }
 
 #menu h3 {
@@ -392,8 +413,8 @@ table {
     padding: 0 1.5em;
     line-height: 3em;
     text-decoration: none;
-    color: @x_light;
-    border-bottom: 1px solid @dark;
+    color: @xx_dark;
+    border-bottom: 1px solid darken(@yellow, 5%);
 
     /* ellipsis */
     width: 100%;
@@ -404,12 +425,12 @@ table {
 }
 
 #menu li:first-child a {
-    border-top: 1px solid @dark;
+    border-top: 0;
 }
 
 #menu a:hover, #menu a:focus {
     outline: 0;
-    background: @dark;
+    background: darken(@yellow, 5%);
 }
 
 
@@ -421,8 +442,8 @@ table {
     width: 100%;
     height: 100%;
     text-align: center;
-    background-image: url(../media/banner.jpg);
-    background-repeat: no-repeat;
+    background-color: @xx_light;
+    background-repeat: no-repeat, no-repeat;
     background-position: 50% 50%;
     background-size: cover;
 }
@@ -431,26 +452,45 @@ table {
     display: table-cell;
     padding: 1.5em;
     vertical-align: middle;
-    background: rgba(240, 241, 235, .25);
-
-    -webkit-text-stroke-width: .1ex;
-    -webkit-text-stroke-color: rgba(240, 241, 235, .35);
+    background: data-uri('../media/mask-arrow.svg') no-repeat 50% 100%;
+    background-size: cover;
+    text-shadow: 3px 0 rgba(255, 255, 255, .3);
+    border: .5em solid @x_light;
+    color: @xx_dark;
 }
 
-#banner h1 {
-    font: 700 3em/1.25em Constantia, "Linux Libertine Display G", Cambria, Georgia, serif;
+#banner h1, #headline {
+    font: 700 3em/1.25em @fontTitle;
 	margin: .25em 0;
 	text-align: center;
+
+    -webkit-text-stroke: 1.5px @x_light;
+            text-stroke: 1.5px @x_light;
+}
+
+#banner object {
+    width: 40%;
+    margin: 0;
+    transform: rotate3d(0, 0, 0, 360deg); /* 3D acceleration */
 }
 
 #banner h2, #banner.subtitle {
     font-style: italic;
-    font-weight: normal;
-    word-spacing: 1ex;
+    font-weight: 700;
+    word-spacing: .75ex;
+
+    -webkit-text-stroke: 1px rgba(255, 255, 255, .3);
+            text-stroke: 1px rgba(255, 255, 255, .3);
 }
+
 
 /* Main : commons
 ------------------------------------------------------------------------------*/
+
+#content {
+    padding-top: (@fontLine * 3);
+    padding-bottom: (@fontLine * 3);
+}
 
 .meta {
     color: @neutral;
@@ -460,28 +500,155 @@ table {
 /* Main : sections
 ------------------------------------------------------------------------------*/
 
-#last-updates {
-    margin: .5em;
-    column-count: 1;
-    column-gap: .25em;
-
+.post-item {
+    padding: .5em;
 }
 
-#last-updates .post {
+.post-item header, .post-item .summary {
+    padding: @fontLine .5em;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.post-item header a {
+    color: #000;
+}
+
+.post-item .summary {
+    text-align: left;
+}
+
+.post-item figure img {
+    width: 100%;
+}
+
+
+/* Single : commons
+------------------------------------------------------------------------------*/
+
+#singlepage .post header {
+    text-align: center;
+    margin: @fontLine 0;
+}
+
+#singlepage #headline {
+    margin: 1em 0;
+}
+
+#singlepage .page-content {
+    margin: auto;
+    max-width: 50em;
+    padding: .75em;
+}
+
+.page-content h2, .page-content h3, .page-content h4, .page-content h5, .page-content h6 {
+    font-family: @fontFamily;
+}
+
+.page-content a {
+    text-decoration: underline;
+}
+
+.page-content a:visited {
+    color: @violet;
+}
+
+
+/* Single : posts
+------------------------------------------------------------------------------*/
+
+#singlepage .meta {
     display: inline-block;
-    margin: .25em 0 0;
-    padding: .5em .5em 1.5em;
+    border: 3px double @light;
+    border-left: 0;
+    border-right: 0;
+    padding: (@fontLine * .5);
+}
+
+#singlepage .post-picture {
+    margin: @fontLine;
+    padding: 0;
+    text-align: center;
+}
+
+
+/* Pagination
+------------------------------------------------------------------------------*/
+
+.pagination {
+    max-width: 20em;
+    margin: (@fontLine * 3) auto 0;
+    text-align: center;
+    border: 3px double @light;
+    border-left: 0;
+    border-right: 0;
+    padding: (@fontLine * .5);
 }
 
 .read-more {
-    margin: .75em 0;
+    text-align: left;
+    margin-top: @fontLine;
+}
+
+.pagination, .read-more {
+    a {
+        display: inline-block;
+        padding: (@fontLine * 0.25) (@fontLine * 0.5);
+        color: @xx_light;
+        fill: @xx_light;
+        stroke: @xx_light;
+        background: @neutral;
+        transition: @duration;
+
+        &:hover, &:focus {
+            background: @blue;
+        }
+    }
+}
+
+.pagination svg {
+    display: inline-block;
+    vertical-align: middle;
+    height: .75em;
+    width: auto;
+    shape-rendering: geometricPrecision;
+}
+
+.read-more a {
+    padding: 0 (@fontLine * 0.5);
+}
+
+
+/* Footer
+------------------------------------------------------------------------------*/
+
+#fold {
+    font-size: .75em;
+    margin-top: 5em;
+    padding: 0 0 @fontLine;
+    text-align: center;
+    color: @neutral;
+    background: @xx_light;
+
+    a {
+        color: @red;
+    }
+}
+
+a.back-top {
+    display: block;
+    height: 4em;
+    background: @x_light data-uri('../media/arrow.svg') no-repeat 50% 100%;
+    background-size: cover;
+    color: @dark !important;
+    line-height: 5em;
 }
 
 
 /* Media Queries
 ------------------------------------------------------------------------------*/
 
-@media only screen and (min-device-height: 700px) {
+@media all and (min-width: 700px) {
 
     /* Structure
     --------------------------------------------------------------------------*/
@@ -492,17 +659,20 @@ table {
     }
     #row-wrapper {
         width: 125%;
-        /*margin-left: -25%;*/
+        width: calc(100% + 20em);
     }
     #menu {
         width: 20%;
+        width: calc(20em);
     }
     #sheet {
         width: 80%;
+        width: calc(100% - 20em);
     }
 
     #main-wrapper.closed #row-wrapper {
         margin-left: -25%;
+        margin-left: calc(-20em);
     }
 
     /* Navbar
@@ -516,7 +686,6 @@ table {
     #navbar ul {
         flex-flow: column wrap;
         border: 0;
-        border-right: 1px solid @dark;
         text-align: center;
     }
 
@@ -565,12 +734,51 @@ table {
 
 }
 
-@media only screen and (min-device-width: 900px) {
+@media all and (min-width: 900px) {
 
-    #last-updates {
-        column-count: 2;
+    .post-item {
+        //display: table;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
     }
 
+    .post-item header, .post-item .summary {
+        //display: table-cell;
+        //width: 50%;
+        flex: 1 1 0;
+    }
+
+    .gallery {
+
+        .post-item.pictorial {
+            align-items: stretch;
+            min-height: 500px;
+            padding: 0;
+        }
+
+        .post-item.pictorial:nth-of-type(even) {
+            flex-direction: row-reverse;
+        }
+
+        .post-item.pictorial header {
+            align-self: center;
+        }
+
+        .post-item.pictorial .summary {
+            background-position: 50% 50%;
+            background-size: cover;
+        }
+
+    }
+
+}
+
+@media all and (min-width: 900px) and (orientation:landscape) {
+    #banner object {
+        width: 30%;
+    }
 }
 
 /* Viewports

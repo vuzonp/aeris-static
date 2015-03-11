@@ -13,6 +13,7 @@ module.exports = function(grunt) {
         uglify: {
             options: {
                 banner: '/*! <%= pkg.name %> v<%= pkg.version %> | (c) <%= grunt.template.today("yyyy") %>, <%= pkg.author.name %> | http://opensource.org/licenses/MIT */\n',
+                //beautify: true
             },
             my_target: {
                 files: {
@@ -32,6 +33,7 @@ module.exports = function(grunt) {
                     banner: '/*! <%= pkg.name %> v<%= pkg.version %> | (c) <%= grunt.template.today("yyyy") %>, <%= pkg.author.name %> | http://opensource.org/licenses/MIT */\n',
                     cleancss: true,
                     compress: true,
+                    strictMath: true
                 },
                 files: {
                     "dist/css/aeris.min.css": "src/less/makeup.less"
