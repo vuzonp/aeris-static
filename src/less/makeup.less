@@ -130,13 +130,12 @@ h5, h6, p, ul, blockquote, dl, pre, img, .medium {
 	padding: 0;
 }
 
-blockquote {
-	margin-left: 3em;
+blockquote, pre, ul {
+    margin: @fontLine 0 @fontLine (@fontLine * 2);
 }
 
-ul {
-    margin-left: @fontLine;
-    padding-left: @fontSize;
+li {
+    padding-left: 1ex;
 }
 
 ul.inline {
@@ -175,10 +174,20 @@ code,
 kbd,
 pre,
 samp {
+    padding: .1em;
+    font-size: .8em;
 	font-family: monospace, serif;
 	_font-family: Consolas, Inconsolata, "courier new", monospace;
-	font-size: .8em;
-	line-height: 1.25em;
+
+}
+
+code {
+    color: @blue;
+    background: @xx_light;
+}
+
+pre code {
+    font-size: 1em;
 }
 
 pre {
@@ -391,7 +400,7 @@ table {
 ------------------------------------------------------------------------------*/
 
 #menu {
-    background: @yellow;
+    background: mix(@yellow, @x_light);
 }
 
 #menu h3 {
@@ -414,7 +423,7 @@ table {
     line-height: 3em;
     text-decoration: none;
     color: @xx_dark;
-    border-bottom: 1px solid darken(@yellow, 5%);
+    border-bottom: 1px solid @yellow;
 
     /* ellipsis */
     width: 100%;
@@ -430,7 +439,7 @@ table {
 
 #menu a:hover, #menu a:focus {
     outline: 0;
-    background: darken(@yellow, 5%);
+    background: @yellow;
 }
 
 
@@ -569,6 +578,15 @@ table {
     margin: @fontLine;
     padding: 0;
     text-align: center;
+}
+
+#singlepage figure {
+    text-align: center;
+
+    figcaption {
+        font-size: .8em;
+        color: @neutral;
+    }
 }
 
 
