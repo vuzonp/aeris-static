@@ -63,7 +63,7 @@ var Æ = (function() {
                     // Fix a bug on firefox on the loading.
                     window.setTimeout(function() {
                         document.getElementById('row-wrapper').classList.add('transition');
-                    }, 250);
+                    }, 0);
                 }
             },
 
