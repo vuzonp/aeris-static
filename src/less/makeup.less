@@ -36,9 +36,9 @@
 }
 
 html {
-    font-size: 100%; /* 1 */
-    -ms-text-size-adjust: 100%; /* 2 */
-    -webkit-text-size-adjust: 100%; /* 2 */
+    font-size: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -70,8 +70,6 @@ audio,
 canvas,
 video {
     display: inline-block;
-    *display: inline;
-    *zoom: 1;
 }
 
 audio:not([controls]) {
@@ -756,6 +754,10 @@ a.back-top {
 }
 
 @media all and (min-width: 900px) {
+
+    body {
+        text-rendering: geometricPrecision;
+    }
 
     .post-item {
         //display: table;
