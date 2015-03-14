@@ -27,7 +27,6 @@
  * @author Thomas Girard
  * @copyright (c) 2015, Thomas Girard
  * @license http://opensource.org/licenses/MIT
- * @version 0.2.0
  */
 
 "use strict";
@@ -56,8 +55,15 @@ var Æ = (function() {
             // Actions
             init: function() {
                 if ("classList" in this.wrapper) {
+
+                    // Close the menu at each loading
                     this.wrapper.style.overflow = 'hidden';
                     this.close();
+
+                    // Fix a bug on firefox on the loading.
+                    window.setTimeout(function() {
+                        document.getElementById('row-wrapper').classList.add('transition');
+                    }, 250);
                 }
             },
 

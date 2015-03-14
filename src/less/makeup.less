@@ -27,7 +27,6 @@
  * @author Thomas Girard
  * @copyright (c) 2015, Thomas Girard
  * @license http://opensource.org/licenses/MIT
- * @version 0.2.0
  */
 
 @import "settings.less";
@@ -37,9 +36,9 @@
 }
 
 html {
-    font-size: 100%; /* 1 */
-    -ms-text-size-adjust: 100%; /* 2 */
-    -webkit-text-size-adjust: 100%; /* 2 */
+    font-size: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -71,8 +70,6 @@ audio,
 canvas,
 video {
     display: inline-block;
-    *display: inline;
-    *zoom: 1;
 }
 
 audio:not([controls]) {
@@ -130,13 +127,12 @@ h5, h6, p, ul, blockquote, dl, pre, img, .medium {
 	padding: 0;
 }
 
-blockquote {
-	margin-left: 3em;
+blockquote, pre, ul {
+    margin: @fontLine 0 @fontLine (@fontLine * 2);
 }
 
-ul {
-    margin-left: @fontLine;
-    padding-left: @fontSize;
+li {
+    padding-left: 1ex;
 }
 
 ul.inline {
@@ -175,10 +171,20 @@ code,
 kbd,
 pre,
 samp {
+    padding: .1em;
+    font-size: .8em;
 	font-family: monospace, serif;
 	_font-family: Consolas, Inconsolata, "courier new", monospace;
-	font-size: .8em;
-	line-height: 1.25em;
+
+}
+
+code {
+    color: @blue;
+    background: @xx_light;
+}
+
+pre code {
+    font-size: 1em;
 }
 
 pre {
@@ -265,6 +271,10 @@ table {
     float: left;
 }
 
+.transition {
+    transition: @duration;
+}
+
 #main-wrapper {
     position: absolute;
     top: 2.25em;
@@ -278,7 +288,7 @@ table {
 #row-wrapper {
     width: 200%;
     height: 100%;
-    transition: @duration;
+    //transition: @duration;
 }
 
 #menu {
@@ -372,7 +382,7 @@ table {
     color: @x_light;
     fill: @x_light;
     stroke: @x_light;
-    transition: .25s;
+    transition: @duration;
 }
 
 #navbar a:hover, #navbar a:focus {
@@ -391,7 +401,7 @@ table {
 ------------------------------------------------------------------------------*/
 
 #menu {
-    background: @yellow;
+    background: mix(@yellow, @x_light);
 }
 
 #menu h3 {
@@ -414,14 +424,14 @@ table {
     line-height: 3em;
     text-decoration: none;
     color: @xx_dark;
-    border-bottom: 1px solid darken(@yellow, 5%);
+    border-bottom: 1px solid @yellow;
 
     /* ellipsis */
     width: 100%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: clip ellipsis;
-    transition: .25s;
+    transition: @duration;
 }
 
 #menu li:first-child a {
@@ -430,7 +440,7 @@ table {
 
 #menu a:hover, #menu a:focus {
     outline: 0;
-    background: darken(@yellow, 5%);
+    background: @yellow;
 }
 
 
@@ -569,6 +579,15 @@ table {
     margin: @fontLine;
     padding: 0;
     text-align: center;
+}
+
+#singlepage figure {
+    text-align: center;
+
+    figcaption {
+        font-size: .8em;
+        color: @neutral;
+    }
 }
 
 
@@ -735,6 +754,10 @@ a.back-top {
 }
 
 @media all and (min-width: 900px) {
+
+    body {
+        text-rendering: geometricPrecision;
+    }
 
     .post-item {
         //display: table;
