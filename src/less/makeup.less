@@ -401,6 +401,29 @@ table {
     width: auto;
 }
 
+a#menu-btn rect {
+    transform-origin: 50% 50%;
+    transition: (@duration * 2);
+
+    rect:first-of-type, rect:last-of-type {
+        transition: @duration;
+    }
+}
+
+a#menu-btn.open {
+
+    rect:first-of-type, rect:last-of-type {
+        opacity: 0;
+    }
+
+    rect:nth-of-type(2) {
+        -webkit-transform: rotate(-45deg);
+    }
+    rect:nth-of-type(3)  {
+        -webkit-transform: rotate(45deg);
+    }
+}
+
 
 /* Menu
 ------------------------------------------------------------------------------*/

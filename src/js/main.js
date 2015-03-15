@@ -67,14 +67,17 @@ var Æ = (function() {
             },
 
             close: function() {
+                this.widget.classList.remove('open');
                 this.wrapper.classList.add('closed');
             },
 
             open: function() {
+                this.widget.classList.add('open');
                 this.wrapper.classList.remove('closed');
             },
 
             toggle: function() {
+                this.widget.classList.toggle('open');
                 this.wrapper.classList.toggle('closed');
             }
         },
