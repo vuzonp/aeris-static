@@ -59,11 +59,6 @@ var Æ = (function() {
                     // Close the menu at each loading
                     this.wrapper.style.overflow = 'hidden';
                     this.close();
-
-                    // Fix a bug on firefox on the loading.
-                    window.setTimeout(function() {
-                        document.getElementById('row-wrapper').classList.add('transition');
-                    }, 0);
                 }
             },
 
