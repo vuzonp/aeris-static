@@ -136,6 +136,7 @@ li {
 }
 
 ul.inline {
+    margin-left: 0;
 	padding: 0;
 	list-style: none;
 }
@@ -261,6 +262,31 @@ table {
     padding: 0;
     position: absolute;
     width: 1px;
+}
+
+.icon {
+    display: inline-block;
+    vertical-align: middle;
+    height: 1em;
+    width: auto;
+    //margin: 0 1ex;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0 (@fontLine * 0.5);
+    border: 1px solid mix(@dark, @background);
+    color: @foreground !important;
+    stroke: @foreground;
+    fill: @foreground;
+    transition: @duration;
+
+    &:hover, &:focus {
+        border-color: @blue;
+        color: @blue !important;
+        fill: @blue;
+        stroke: @blue;
+    }
 }
 
 
@@ -558,6 +584,17 @@ a#menu-btn.open {
     width: 100%;
 }
 
+.tags a {
+    .btn;
+    font-size: .8em;
+    fill: none;
+
+    &:hover {
+        stroke: none;
+    }
+
+}
+
 
 /* Single : commons
 ------------------------------------------------------------------------------*/
@@ -634,22 +671,26 @@ a#menu-btn.open {
     text-align: left;
     margin-top: @fontLine;
 }
-
+/*
 .pagination, .read-more {
     a {
         display: inline-block;
         padding: (@fontLine * 0.25) (@fontLine * 0.5);
-        color: @xx_light;
-        fill: @xx_light;
-        stroke: @xx_light;
-        background: @neutral;
+        color: @neutral;
+        fill: @neutral;
+        stroke: @neutral;
+        border: 1px solid @neutral;
         transition: @duration;
 
         &:hover, &:focus {
-            background: @blue;
+            border-color: @blue;
+            color: @blue;
+            fill: @blue;
+            stroke: @blue;
         }
     }
 }
+
 
 .pagination svg {
     display: inline-block;
@@ -661,6 +702,12 @@ a#menu-btn.open {
 
 .read-more a {
     padding: 0 (@fontLine * 0.5);
+}
+
+*/
+
+.pagination a, .read-more a {
+    .btn;
 }
 
 
@@ -779,7 +826,9 @@ a.back-top {
         white-space: nowrap;
         writing-mode: vertical-lr;
         writing-mode:tb-rl;
-    	transform:rotate(90deg);
+        direction: rtl;
+        //unicode-bidi: bidi-override;
+    	transform:rotate(-90deg);
     	white-space:nowrap;
     	display:block;
         text-align: center;
