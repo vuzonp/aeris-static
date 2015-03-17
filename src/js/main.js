@@ -67,59 +67,24 @@ var Æ = (function() {
             },
 
             close: function() {
+                this.widget.classList.remove('open');
                 this.wrapper.classList.add('closed');
             },
 
             open: function() {
+                this.widget.classList.add('open');
                 this.wrapper.classList.remove('closed');
             },
 
             toggle: function() {
+                this.widget.classList.toggle('open');
                 this.wrapper.classList.toggle('closed');
             }
         },
 
-        /**
-         * Posts previewer
-         */
-        post: {
-
-            init: function() {
-                var wrapper = document.getElementById('last-updates').getElementsByClassName('gallery');
-
-                for(var i = 0; i < wrapper.length; i++) {
-
-                    var w = wrapper.item(i);
-
-                    var elem, img, post, summary, src;
-                    var list = w.getElementsByClassName('post-picture');
-
-                    while(list.length > 0) {
-                        // Select the nodes
-                        var elem = list.item(0);
-                        img = (elem.nodeName == "IMG") ? elem : elem.getElementsByTagName('img')[0];
-                        summary =  elem.parentNode;
-                        post = summary.parentNode;
-
-                        if (img.nodeName == 'IMG') {
-                            src = img.getAttribute('src');
-                            post.classList.add('pictorial');
-                            summary.style.backgroundImage = 'url('+ src +')';
-                        }
-                        summary.removeChild(elem);
-                        post.onclick = function() {
-                            var url = this.getElementsByTagName('a')[0].getAttribute('href');
-                            window.location = url;
-                        };
-                    }
-                }
-            }
-
-        },
-
         setup: function() {
             this.menu.init();
-            this.post.init();
+            //this.post.init();
         }
 
     };
