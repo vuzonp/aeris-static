@@ -54,7 +54,7 @@ var Æ = (function() {
 
             // Actions
             init: function() {
-                if ("classList" in this.wrapper) {
+                if ( "classList" in this.wrapper ) {
 
                     // Close the menu at each loading
                     this.wrapper.style.overflow = 'hidden';
@@ -82,9 +82,36 @@ var Æ = (function() {
             }
         },
 
+        /**
+         * Button: ascend
+         */
+        lift: {
+
+            wrapper: document.getElementById('main-wrapper'),
+            sheet: document.getElementById('sheet'),
+            content: document.getElementById('content-wrapper'),
+            widget: document.getElementById('back-top'),
+
+            detect: function() {
+                var screenHeight = this.wrapper.offsetHeight;
+                var contentHeight = this.content.offsetHeight;
+                var position = this.sheet.scrollTop;
+
+                if (position > screenHeight && position < (contentHeight - position * 0.5) ) {
+                    // show the widget only where we are in middle of the pages
+                    if ( ! this.widget.classList.contains('onflow') ) {
+                        this.widget.classList.add('onflow');
+                    }
+                } else {
+                    this.widget.classList.remove('onflow');
+                }
+            }
+
+        },
+
         setup: function() {
             this.menu.init();
-            //this.post.init();
+            this.ascend();
         }
 
     };
@@ -95,7 +122,19 @@ var Æ = (function() {
 
     æ.menu.widget.onclick = function() {
         æ.menu.toggle();
+
+        if (! æ.menu.isHidden()) {
+            // Never show the widget while the menu is open
+            æ.lift.widget.classList.remove('onflow');
+        } else {
+            æ.lift.detect();
+        }
+
         return false;
+    };
+
+    æ.lift.sheet.onscroll = function() {
+        æ.lift.detect();
     };
 
 

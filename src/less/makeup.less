@@ -608,7 +608,7 @@ a#menu-btn.open {
     text-align: center;
 }
 
-.album-item figcaption h4 a, .post-item header h3 a {
+.post-title a {
 
     //display: block;
     border-bottom: 1px dotted rgba(0, 0, 0, 0);
@@ -716,7 +716,7 @@ a#menu-btn.open {
 
 #fold {
     font-size: .75em;
-    margin-top: 5em;
+    margin-top: (@fontLine * 12);
     padding: 0 0 @fontLine;
     text-align: center;
     color: @neutral;
@@ -727,7 +727,7 @@ a#menu-btn.open {
     }
 }
 
-a.back-top {
+a#back-top {
     display: block;
     height: 4em;
     background: @x_light data-uri('../media/arrow.svg') no-repeat 50% 100%;
@@ -736,6 +736,21 @@ a.back-top {
     line-height: 5em;
 }
 
+a#back-top.onflow {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    opacity: .85;
+    transition: @duration;
+    height: (@fontLine * 2);
+    line-height: (@fontLine * 2);
+    background: @xx_light;
+
+    &:hover {
+        opacity: 1;
+    }
+}
 
 /* Media Queries
 ------------------------------------------------------------------------------*/
