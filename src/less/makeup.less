@@ -572,16 +572,13 @@ a#menu-btn.open {
     text-align: center;
 }
 
-.post-item header a {
+.post-item header a, .album-item a {
     color: #000;
+    transition: (@duration * 1);
 }
 
 .post-item .summary {
     text-align: left;
-}
-
-.post-item figure img {
-    width: 100%;
 }
 
 .tags a {
@@ -595,11 +592,37 @@ a#menu-btn.open {
 
 }
 
+/* Albums */
+#last-albums {
+    background-color: @x_light;
+    background-image: data-uri('../media/mask-arrow.svg'), data-uri('../media/arrow.svg');
+    background-repeat: no-repeat, no-repeat;
+    background-position: 50% 100%, 50% 0%;
+    background-size: cover, cover;
+    margin: (@fontLine * 2) .5em;
+    padding: (@fontLine * 3) .5em (@fontLine * 2);
+}
+
+.album-item figcaption {
+    display: block;
+    text-align: center;
+}
+
+.album-item figcaption h4 a, .post-item header h3 a {
+
+    //display: block;
+    border-bottom: 1px dotted rgba(0, 0, 0, 0);
+
+    &:hover {
+        border-color: @xx_dark;
+    }
+}
+
 
 /* Single : commons
 ------------------------------------------------------------------------------*/
 
-#singlepage .post header {
+#singlepage header {
     text-align: center;
     margin: @fontLine 0;
 }
@@ -624,6 +647,17 @@ a#menu-btn.open {
 
 .page-content a:visited {
     color: @violet;
+}
+
+/* Single : album
+------------------------------------------------------------------------------*/
+#singlepage .album .post-picture {
+    margin: @fontLine 0;
+}
+#singlepage .album .page-content {
+    width: 100%;
+    max-width: 100%;
+    padding: .75em;
 }
 
 
@@ -671,40 +705,6 @@ a#menu-btn.open {
     text-align: left;
     margin-top: @fontLine;
 }
-/*
-.pagination, .read-more {
-    a {
-        display: inline-block;
-        padding: (@fontLine * 0.25) (@fontLine * 0.5);
-        color: @neutral;
-        fill: @neutral;
-        stroke: @neutral;
-        border: 1px solid @neutral;
-        transition: @duration;
-
-        &:hover, &:focus {
-            border-color: @blue;
-            color: @blue;
-            fill: @blue;
-            stroke: @blue;
-        }
-    }
-}
-
-
-.pagination svg {
-    display: inline-block;
-    vertical-align: middle;
-    height: .75em;
-    width: auto;
-    shape-rendering: geometricPrecision;
-}
-
-.read-more a {
-    padding: 0 (@fontLine * 0.5);
-}
-
-*/
 
 .pagination a, .read-more a {
     .btn;
@@ -843,7 +843,6 @@ a.back-top {
     }
 
     .post-item {
-        //display: table;
         display: flex;
         flex-flow: row nowrap;
         justify-content: center;
@@ -851,35 +850,54 @@ a.back-top {
     }
 
     .post-item header, .post-item .summary {
-        //display: table-cell;
-        //width: 50%;
         flex: 1 1 0;
     }
 
-    .gallery {
+    .album-item {
+        width: 100%;
+    }
+    .album-item figure {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
+    }
+    .album-item:nth-of-type(even) figure {
+        flex-direction: row-reverse;
+    }
+    .album-item figure img {
+        display:block;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    .album-item img {
+        transition: @duration ease (@duration * 2);
+        clip-path: polygon(50% 0%, 100% 0%, 100% 50%, 100% 100%, 50% 100%, 0% 100%, 0% 0%);
+    }
+    .album-item:hover img {
+        filter: grayscale(0%);
+        clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
+    }
+    .album-item:nth-of-type(even) img {
+        clip-path: polygon(0% 0%, 50% 0%, 100% 0%, 100% 50%, 100% 100%, 50% 100%, 0% 100%);
+    }
+    .album-item:nth-of-type(even):hover img {
+        clip-path: polygon(40% 0%, 40% 20%, 100% 20%, 100% 80%, 40% 80%, 40% 100%, 0% 50%);
+    }
 
-        .post-item.pictorial {
-            align-items: stretch;
-            min-height: 500px;
-            padding: 0;
-        }
-
-        .post-item.pictorial:nth-of-type(even) {
-            flex-direction: row-reverse;
-        }
-
-        .post-item.pictorial header {
-            align-self: center;
-        }
-
-        .post-item.pictorial .summary {
-            background-position: 50% 50%;
-            background-size: cover;
-        }
-
+    .album-item > figure > .picture,
+    .album-item > figure > figcaption {
+        display:block;
+        flex: 1 1 0;
+        margin: 0;
+        padding: 0;
     }
 
 }
+
+/* Animations
+------------------------------------------------------------------------------*/
 
 
 /* Viewports
