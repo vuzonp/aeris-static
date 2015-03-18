@@ -111,7 +111,6 @@ var Æ = (function() {
 
         setup: function() {
             this.menu.init();
-            this.ascend();
         }
 
     };
