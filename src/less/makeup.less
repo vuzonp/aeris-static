@@ -136,6 +136,7 @@ li {
 }
 
 ul.inline {
+    margin-left: 0;
 	padding: 0;
 	list-style: none;
 }
@@ -263,16 +264,46 @@ table {
     width: 1px;
 }
 
+.icon {
+    display: inline-block;
+    vertical-align: middle;
+    height: 1em;
+    width: auto;
+    //margin: 0 1ex;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0 (@fontLine * 0.5);
+    border: 1px solid mix(@dark, @background);
+    color: @foreground !important;
+    stroke: @foreground;
+    fill: @foreground;
+    transition: @duration;
+
+    &:hover, &:focus {
+        border-color: @blue;
+        color: @blue !important;
+        fill: @blue;
+        stroke: @blue;
+    }
+}
+
 
 /* Structure
 ------------------------------------------------------------------------------*/
 
-.column {
-    float: left;
+#blank {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: @xx_light;
 }
 
-.transition {
-    transition: @duration;
+.column {
+    float: left;
 }
 
 #main-wrapper {
@@ -288,7 +319,7 @@ table {
 #row-wrapper {
     width: 200%;
     height: 100%;
-    //transition: @duration;
+    transition: @duration;
 }
 
 #menu {
@@ -344,11 +375,11 @@ table {
 }
 
 #navbar > ul > li {
-    flex: 5 2 .5em;
+    flex: 3 1 .5em;
 }
 
 #navbar > ul > li:last-child {
-    flex: 2 2 0;
+    flex: 4 3 0;
 }
 
 #navbar > ul > li > ul {
@@ -389,19 +420,44 @@ table {
     background: @dark;
 }
 
-#navbar svg {
+#navbar svg, #navbar img {
     display: inline-block;
     vertical-align: middle;
     max-height: 1em;
     width: auto;
 }
 
+a#menu-btn rect {
+    transform-origin: 50% 50%;
+    transition: (@duration * 2);
+
+    rect:first-of-type, rect:last-of-type {
+        transition: @duration;
+    }
+}
+
+a#menu-btn.open {
+
+    rect:first-of-type, rect:last-of-type {
+        opacity: 0;
+    }
+
+    rect:nth-of-type(2) {
+        -webkit-transform: rotate(-45deg);
+    }
+    rect:nth-of-type(3)  {
+        -webkit-transform: rotate(45deg);
+    }
+}
+
 
 /* Menu
 ------------------------------------------------------------------------------*/
 
+@menuColor: darken(@x_light, 5%);
+
 #menu {
-    background: mix(@yellow, @x_light);
+    background: @menuColor;
 }
 
 #menu h3 {
@@ -424,7 +480,7 @@ table {
     line-height: 3em;
     text-decoration: none;
     color: @xx_dark;
-    border-bottom: 1px solid @yellow;
+    border-bottom: 1px solid lighten(@menuColor, 10%);
 
     /* ellipsis */
     width: 100%;
@@ -440,7 +496,7 @@ table {
 
 #menu a:hover, #menu a:focus {
     outline: 0;
-    background: @yellow;
+    background: lighten(@menuColor, 10%);
 }
 
 
@@ -460,7 +516,7 @@ table {
 
 #banner .headline {
     display: table-cell;
-    padding: 1.5em;
+    //padding: 1.5em;
     vertical-align: middle;
     background: data-uri('../media/mask-arrow.svg') no-repeat 50% 100%;
     background-size: cover;
@@ -478,11 +534,7 @@ table {
             text-stroke: 1.5px @x_light;
 }
 
-#banner object {
-    width: 40%;
-    margin: 0;
-    transform: rotate3d(0, 0, 0, 360deg); /* 3D acceleration */
-}
+
 
 #banner h2, #banner.subtitle {
     font-style: italic;
@@ -520,23 +572,57 @@ table {
     text-align: center;
 }
 
-.post-item header a {
+.post-item header a, .album-item a {
     color: #000;
+    transition: (@duration * 1);
 }
 
 .post-item .summary {
     text-align: left;
 }
 
-.post-item figure img {
-    width: 100%;
+.tags a {
+    .btn;
+    font-size: .8em;
+    fill: none;
+
+    &:hover {
+        stroke: none;
+    }
+
+}
+
+/* Albums */
+#last-albums {
+    background-color: @x_light;
+    background-image: data-uri('../media/mask-arrow.svg'), data-uri('../media/arrow.svg');
+    background-repeat: no-repeat, no-repeat;
+    background-position: 50% 100%, 50% 0%;
+    background-size: cover, cover;
+    margin: (@fontLine * 2) .5em;
+    padding: (@fontLine * 3) .5em (@fontLine * 2);
+}
+
+.album-item figcaption {
+    display: block;
+    text-align: center;
+}
+
+.post-title a {
+
+    //display: block;
+    border-bottom: 1px dotted rgba(0, 0, 0, 0);
+
+    &:hover {
+        border-color: @xx_dark;
+    }
 }
 
 
 /* Single : commons
 ------------------------------------------------------------------------------*/
 
-#singlepage .post header {
+#singlepage header {
     text-align: center;
     margin: @fontLine 0;
 }
@@ -563,6 +649,17 @@ table {
     color: @violet;
 }
 
+/* Single : album
+------------------------------------------------------------------------------*/
+#singlepage .album .post-picture {
+    margin: @fontLine 0;
+}
+#singlepage .album .page-content {
+    width: 100%;
+    max-width: 100%;
+    padding: .75em;
+}
+
 
 /* Single : posts
 ------------------------------------------------------------------------------*/
@@ -587,6 +684,12 @@ table {
     figcaption {
         font-size: .8em;
         color: @neutral;
+
+        h4 {
+            border: 3px double mix(@neutral, @background);
+            display: inline-block;
+            padding: .5em;
+        }
     }
 }
 
@@ -609,32 +712,8 @@ table {
     margin-top: @fontLine;
 }
 
-.pagination, .read-more {
-    a {
-        display: inline-block;
-        padding: (@fontLine * 0.25) (@fontLine * 0.5);
-        color: @xx_light;
-        fill: @xx_light;
-        stroke: @xx_light;
-        background: @neutral;
-        transition: @duration;
-
-        &:hover, &:focus {
-            background: @blue;
-        }
-    }
-}
-
-.pagination svg {
-    display: inline-block;
-    vertical-align: middle;
-    height: .75em;
-    width: auto;
-    shape-rendering: geometricPrecision;
-}
-
-.read-more a {
-    padding: 0 (@fontLine * 0.5);
+.pagination a, .read-more a {
+    .btn;
 }
 
 
@@ -643,7 +722,7 @@ table {
 
 #fold {
     font-size: .75em;
-    margin-top: 5em;
+    margin-top: (@fontLine * 12);
     padding: 0 0 @fontLine;
     text-align: center;
     color: @neutral;
@@ -654,7 +733,7 @@ table {
     }
 }
 
-a.back-top {
+a#back-top {
     display: block;
     height: 4em;
     background: @x_light data-uri('../media/arrow.svg') no-repeat 50% 100%;
@@ -663,6 +742,21 @@ a.back-top {
     line-height: 5em;
 }
 
+a#back-top.onflow {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    opacity: .85;
+    transition: @duration;
+    height: (@fontLine * 2);
+    line-height: (@fontLine * 2);
+    background: @xx_light;
+
+    &:hover {
+        opacity: 1;
+    }
+}
 
 /* Media Queries
 ------------------------------------------------------------------------------*/
@@ -740,15 +834,25 @@ a.back-top {
 
     #navbar li.sitename a {
         width: 3em;
-        word-wrap: break-word;
-        white-space: normal;
+        height: 100%;
+        background: transparent;
+
+        &:hover, &:focus {
+            color: mix(@neutral, @light);
+        }
     }
 
     #navbar li.sitename strong {
-        display: inline-block;
-        width: 1ex;
-        line-height: 1em;
-        padding: .5em 0;
+        display: block;;
+        white-space: nowrap;
+        writing-mode: vertical-lr;
+        writing-mode:tb-rl;
+        direction: rtl;
+        //unicode-bidi: bidi-override;
+    	transform:rotate(-90deg);
+    	white-space:nowrap;
+    	display:block;
+        text-align: center;
     }
 
 }
@@ -760,7 +864,6 @@ a.back-top {
     }
 
     .post-item {
-        //display: table;
         display: flex;
         flex-flow: row nowrap;
         justify-content: center;
@@ -768,41 +871,55 @@ a.back-top {
     }
 
     .post-item header, .post-item .summary {
-        //display: table-cell;
-        //width: 50%;
         flex: 1 1 0;
     }
 
-    .gallery {
+    .album-item {
+        width: 100%;
+    }
+    .album-item figure {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
+    }
+    .album-item:nth-of-type(even) figure {
+        flex-direction: row-reverse;
+    }
+    .album-item figure img {
+        display:block;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    .album-item img {
+        transition: @duration ease (@duration * 2);
+        clip-path: polygon(50% 0%, 100% 0%, 100% 50%, 100% 100%, 50% 100%, 0% 100%, 0% 0%);
+    }
+    .album-item:hover img {
+        filter: grayscale(0%);
+        clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
+    }
+    .album-item:nth-of-type(even) img {
+        clip-path: polygon(0% 0%, 50% 0%, 100% 0%, 100% 50%, 100% 100%, 50% 100%, 0% 100%);
+    }
+    .album-item:nth-of-type(even):hover img {
+        clip-path: polygon(40% 0%, 40% 20%, 100% 20%, 100% 80%, 40% 80%, 40% 100%, 0% 50%);
+    }
 
-        .post-item.pictorial {
-            align-items: stretch;
-            min-height: 500px;
-            padding: 0;
-        }
-
-        .post-item.pictorial:nth-of-type(even) {
-            flex-direction: row-reverse;
-        }
-
-        .post-item.pictorial header {
-            align-self: center;
-        }
-
-        .post-item.pictorial .summary {
-            background-position: 50% 50%;
-            background-size: cover;
-        }
-
+    .album-item > figure > .picture,
+    .album-item > figure > figcaption {
+        display:block;
+        flex: 1 1 0;
+        margin: 0;
+        padding: 0;
     }
 
 }
 
-@media all and (min-width: 900px) and (orientation:landscape) {
-    #banner object {
-        width: 30%;
-    }
-}
+/* Animations
+------------------------------------------------------------------------------*/
+
 
 /* Viewports
 ------------------------------------------------------------------------------*/

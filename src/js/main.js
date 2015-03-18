@@ -54,16 +54,11 @@ var Æ = (function() {
 
             // Actions
             init: function() {
-                if ("classList" in this.wrapper) {
+                if ( "classList" in this.wrapper ) {
 
                     // Close the menu at each loading
                     this.wrapper.style.overflow = 'hidden';
                     this.close();
-
-                    // Fix a bug on firefox on the loading.
-                    window.setTimeout(function() {
-                        document.getElementById('row-wrapper').classList.add('transition');
-                    }, 0);
                 }
             },
 
@@ -72,51 +67,43 @@ var Æ = (function() {
             },
 
             close: function() {
+                this.widget.classList.remove('open');
                 this.wrapper.classList.add('closed');
             },
 
             open: function() {
+                this.widget.classList.add('open');
                 this.wrapper.classList.remove('closed');
             },
 
             toggle: function() {
+                this.widget.classList.toggle('open');
                 this.wrapper.classList.toggle('closed');
             }
         },
 
         /**
-         * Posts previewer
+         * Button: ascend
          */
-        post: {
+        lift: {
 
-            init: function() {
-                var wrapper = document.getElementById('last-updates').getElementsByClassName('gallery');
+            wrapper: document.getElementById('main-wrapper'),
+            sheet: document.getElementById('sheet'),
+            content: document.getElementById('content-wrapper'),
+            widget: document.getElementById('back-top'),
 
-                for(var i = 0; i < wrapper.length; i++) {
+            detect: function() {
+                var screenHeight = this.wrapper.offsetHeight;
+                var contentHeight = this.content.offsetHeight;
+                var position = this.sheet.scrollTop;
 
-                    var w = wrapper.item(i);
-
-                    var elem, img, post, summary, src;
-                    var list = w.getElementsByClassName('post-picture');
-
-                    while(list.length > 0) {
-                        // Select the nodes
-                        var elem = list.item(0);
-                        img = (elem.nodeName == "IMG") ? elem : elem.getElementsByTagName('img')[0];
-                        summary =  elem.parentNode;
-                        post = summary.parentNode;
-
-                        if (img.nodeName == 'IMG') {
-                            src = img.getAttribute('src');
-                            post.classList.add('pictorial');
-                            summary.style.backgroundImage = 'url('+ src +')';
-                        }
-                        summary.removeChild(elem);
-                        post.onclick = function() {
-                            var url = this.getElementsByTagName('a')[0].getAttribute('href');
-                            window.location = url;
-                        };
+                if (position > screenHeight && position < (contentHeight - position * 0.5) ) {
+                    // show the widget only where we are in middle of the pages
+                    if ( ! this.widget.classList.contains('onflow') ) {
+                        this.widget.classList.add('onflow');
                     }
+                } else {
+                    this.widget.classList.remove('onflow');
                 }
             }
 
@@ -124,7 +111,6 @@ var Æ = (function() {
 
         setup: function() {
             this.menu.init();
-            this.post.init();
         }
 
     };
@@ -135,7 +121,19 @@ var Æ = (function() {
 
     æ.menu.widget.onclick = function() {
         æ.menu.toggle();
+
+        if (! æ.menu.isHidden()) {
+            // Never show the widget while the menu is open
+            æ.lift.widget.classList.remove('onflow');
+        } else {
+            æ.lift.detect();
+        }
+
         return false;
+    };
+
+    æ.lift.sheet.onscroll = function() {
+        æ.lift.detect();
     };
 
 
