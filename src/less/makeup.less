@@ -863,6 +863,10 @@ a#back-top.onflow {
         text-rendering: geometricPrecision;
     }
 
+    #last-albums {
+        transform: translateZ(0); /* http://www.alsacreations.com/astuce/lire/1565-acceleration-materielle-au-service-de-vos-animations-css.html */
+    }
+
     .post-item {
         display: flex;
         flex-flow: row nowrap;
@@ -894,7 +898,6 @@ a#back-top.onflow {
     }
     .album-item img {
         transition: @duration ease (@duration * 2);
-        transform: translateZ(0); /* http://www.alsacreations.com/astuce/lire/1565-acceleration-materielle-au-service-de-vos-animations-css.html */
         -webkit-clip-path: polygon(50% 0%, 100% 0%, 100% 50%, 100% 100%, 50% 100%, 0% 100%, 0% 0%);
     }
     .album-item:hover img {
